@@ -60,7 +60,9 @@ namespace wgu_968
             }
             else
             {
+               dgvParts.ClearSelection();
                dgvParts.DataSource = Inventory.Parts;
+               
             }
             
         }
@@ -84,7 +86,18 @@ namespace wgu_968
 
         private void modifypartbtn_Click(object sender, EventArgs e)
         {
-            new ModifyForm().ShowDialog();
+            dgvParts.ClearSelection();
+            if (dgvParts.CurrentRow == null)
+            {
+                MessageBox.Show("select part first"); 
+                return;
+            }
+            int index = dgvParts.CurrentRow.Index;
+            Part chosenPart = (Part)dgvParts.CurrentRow.DataBoundItem;
+            ModifyForm form = new ModifyForm(chosenPart, index);
+            form.ShowDialog();
+
+            //new ModifyForm().ShowDialog();
         }
 
         private void addProductbtn_Click(object sender, EventArgs e)

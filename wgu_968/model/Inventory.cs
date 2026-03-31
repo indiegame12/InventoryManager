@@ -10,8 +10,7 @@ namespace wgu_968.model
 {
     public class Inventory
     {
-        public static BindingList<Part> 
-            Parts = new BindingList<Part>();
+        public static BindingList<Part> Parts = new BindingList<Part>();
         public static BindingList <Product> Products = new BindingList<Product>();
 
         public static void AddPart( Part part) => Parts.Add(part);
@@ -20,6 +19,13 @@ namespace wgu_968.model
         {
             var SearchPart = Parts.FirstOrDefault(part => part.PartID == partId);
             return SearchPart;
+        }
+
+        public void modifyPart(int partId, Part part)
+        {
+            var index = Parts.IndexOf(SearchPart(partId));
+            Parts[index] = part;
+            
         }
     }
 }

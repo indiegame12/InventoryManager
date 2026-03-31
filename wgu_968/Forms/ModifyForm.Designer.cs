@@ -241,6 +241,7 @@
             this.Controls.Add(this.inHousebtn);
             this.Name = "ModifyForm";
             this.Text = "Modify Form";
+            this.Load += new System.EventHandler(this.ModifyForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
