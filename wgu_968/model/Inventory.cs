@@ -21,7 +21,7 @@ namespace wgu_968.model
             return SearchPart;
         }
 
-        public void modifyPart(int partId, Part part)
+        public static void modifyPart(int partId, Part part)
         {
             var index = Parts.IndexOf(SearchPart(partId));
             Parts[index] = part;

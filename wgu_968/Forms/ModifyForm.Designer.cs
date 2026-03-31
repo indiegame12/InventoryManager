@@ -214,6 +214,7 @@
             this.partsavebtn.TabIndex = 35;
             this.partsavebtn.Text = "Save";
             this.partsavebtn.UseVisualStyleBackColor = true;
+            this.partsavebtn.Click += new System.EventHandler(this.partsavebtn_Click);
             // 
             // ModifyForm
             // 

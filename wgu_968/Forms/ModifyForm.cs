@@ -26,8 +26,8 @@ namespace wgu_968.Forms
             textBox2.Text = part.Name.ToString();
             textBox3.Text = part.Instock.ToString();
             textBox4.Text = part.Price.ToString();
-            textBox6.Text = part.Min.ToString();
-            textBox7.Text = part.Max.ToString();
+            textBox7.Text = part.Min.ToString();
+            textBox6.Text = part.Max.ToString();
             if (part is Inhouse inhouse)
             {
                 inHousebtn.Checked = true;
@@ -62,6 +62,30 @@ namespace wgu_968.Forms
         private void ModifyForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void partsavebtn_Click(object sender, EventArgs e)
+        {
+            Part updatedPart;
+            if (inHousebtn.Checked)
+            {
+                updatedPart = new Inhouse();
+                ((Inhouse)updatedPart).MachineId = int.Parse(Machine.Text);
+            }
+            else
+            {
+                updatedPart = new Outsourced();
+                ((Outsourced)updatedPart).CompanyName = Machine.Text;
+            }
+            updatedPart.PartID = int.Parse(textBox1.Text);
+            updatedPart.Name = textBox2.Text;
+            updatedPart.Instock = int.Parse(textBox3.Text);
+            updatedPart.Price = int.Parse(textBox4.Text);   
+            updatedPart.Min = int.Parse(textBox7.Text);
+            updatedPart.Max = int.Parse(textBox6.Text);
+
+            Inventory.modifyPart(partindex, updatedPart);
+            this.Close();
         }
     }
 }
