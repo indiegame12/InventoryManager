@@ -125,6 +125,7 @@
             this.Machine.Size = new System.Drawing.Size(62, 13);
             this.Machine.TabIndex = 24;
             this.Machine.Text = "Machine ID";
+            this.Machine.Click += new System.EventHandler(this.Machine_Click);
             // 
             // partPriceLA
             // 

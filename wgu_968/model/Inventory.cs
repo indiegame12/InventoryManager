@@ -23,8 +23,14 @@ namespace wgu_968.model
 
         public static void modifyPart(int partId, Part part)
         {
-            var index = Parts.IndexOf(SearchPart(partId));
-            Parts[index] = part;
+           Part modifedPart = SearchPart(partId);
+            if (modifedPart != null)
+            {
+                int index = Parts.IndexOf(modifedPart);
+                Parts[index] = part;
+            }
+
+            
             
         }
     }

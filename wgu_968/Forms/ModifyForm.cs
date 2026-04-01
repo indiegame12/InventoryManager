@@ -31,7 +31,7 @@ namespace wgu_968.Forms
             if (part is Inhouse inhouse)
             {
                 inHousebtn.Checked = true;
-                Machine.Text = "Machine ID";
+                Machine.Text = "MachineID";
                 textBox5.Text = inhouse.MachineId.ToString();
             }
             else if (part is Outsourced outsourced)
@@ -66,26 +66,32 @@ namespace wgu_968.Forms
 
         private void partsavebtn_Click(object sender, EventArgs e)
         {
-            Part updatedPart;
+            Part part;
             if (inHousebtn.Checked)
             {
-                updatedPart = new Inhouse();
-                ((Inhouse)updatedPart).MachineId = int.Parse(Machine.Text);
+                part = new Inhouse();
+             
+                ((Inhouse)part).MachineId = int.Parse(textBox5.Text);
             }
             else
             {
-                updatedPart = new Outsourced();
-                ((Outsourced)updatedPart).CompanyName = Machine.Text;
+                part = new Outsourced();
+                ((Outsourced)part).CompanyName = textBox5.Text;
             }
-            updatedPart.PartID = int.Parse(textBox1.Text);
-            updatedPart.Name = textBox2.Text;
-            updatedPart.Instock = int.Parse(textBox3.Text);
-            updatedPart.Price = int.Parse(textBox4.Text);   
-            updatedPart.Min = int.Parse(textBox7.Text);
-            updatedPart.Max = int.Parse(textBox6.Text);
+            part.PartID = part.PartID;
+            part.Name = textBox2.Text;
+            part.Instock = int.Parse(textBox3.Text);
+            part.Price = int.Parse(textBox4.Text);   
+            part.Min = int.Parse(textBox7.Text);
+            part.Max = int.Parse(textBox6.Text);
 
-            Inventory.modifyPart(partindex, updatedPart);
+            Inventory.modifyPart(partindex, part);
             this.Close();
+        }
+
+        private void Machine_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
