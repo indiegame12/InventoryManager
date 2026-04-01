@@ -14,27 +14,27 @@ namespace wgu_968.Forms
 {
     public partial class ModifyForm : Form
     {
-        private Part part;
+        private Part orginalPart;
         private int partindex;
 
         public ModifyForm(Part selectedPart, int index)
         {
             InitializeComponent();
-            part = selectedPart;
+            orginalPart = selectedPart;
             partindex = index;
-            textBox1.Text = part.PartID.ToString();
-            textBox2.Text = part.Name.ToString();
-            textBox3.Text = part.Instock.ToString();
-            textBox4.Text = part.Price.ToString();
-            textBox7.Text = part.Min.ToString();
-            textBox6.Text = part.Max.ToString();
-            if (part is Inhouse inhouse)
+            textBox1.Text = selectedPart.PartID.ToString();
+            textBox2.Text = selectedPart.Name.ToString();
+            textBox3.Text = selectedPart.Instock.ToString();
+            textBox4.Text = selectedPart.Price.ToString();
+            textBox7.Text = selectedPart.Min.ToString();
+            textBox6.Text = selectedPart.Max.ToString();
+            if (selectedPart is Inhouse inhouse)
             {
                 inHousebtn.Checked = true;
                 Machine.Text = "MachineID";
-                textBox5.Text = inhouse.MachineId.ToString();
+                textBox5.Text = inhouse.MachineID.ToString();
             }
-            else if (part is Outsourced outsourced)
+            else if (selectedPart is Outsourced outsourced)
             {
                 OutSourcedbtn.Checked = true;
                 Machine.Text = "CompanyName";
@@ -67,26 +67,55 @@ namespace wgu_968.Forms
         private void partsavebtn_Click(object sender, EventArgs e)
         {
             Part part;
+            if (!int.TryParse(textBox3.Text, out int Instock) ||
+                !decimal.TryParse(textBox4.Text, out decimal Price) ||
+                !int.TryParse(textBox7.Text, out int Min) ||
+                !int.TryParse(textBox6.Text, out int Max))
+            {
+                MessageBox.Show("Please enter valid numeric field");
+                return;
+            }
+            if (Min > Max)
+            {
+                MessageBox.Show("Min cannot be larger than Max");
+                return;
+            }
+            if (Instock < Min || Instock > Max)
+            {
+                MessageBox.Show("Inventory must between min and max");
+                return;
+            }
+            if (inHousebtn.Checked)
+            {
+                if (!int.TryParse(textBox5.Text, out int MachineId))
+                {
+                    MessageBox.Show("MachineID must be a numeric");
+                    return;
+                }
+            }
+
             if (inHousebtn.Checked)
             {
                 part = new Inhouse();
              
-                ((Inhouse)part).MachineId = int.Parse(textBox5.Text);
+                ((Inhouse)part).MachineID = int.Parse(textBox5.Text);
             }
             else
             {
                 part = new Outsourced();
                 ((Outsourced)part).CompanyName = textBox5.Text;
             }
-            part.PartID = part.PartID;
+
+            part.PartID = orginalPart.PartID;
             part.Name = textBox2.Text;
             part.Instock = int.Parse(textBox3.Text);
             part.Price = int.Parse(textBox4.Text);   
             part.Min = int.Parse(textBox7.Text);
             part.Max = int.Parse(textBox6.Text);
 
-            Inventory.modifyPart(partindex, part);
+            Inventory.updatePart(orginalPart.PartID, part);
             this.Close();
+            
         }
 
         private void Machine_Click(object sender, EventArgs e)

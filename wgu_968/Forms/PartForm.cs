@@ -15,14 +15,21 @@ namespace wgu_968.Forms
 {
     public partial class PartForm : Form
     {
+        private int GenerateID()
+        { 
+            if (Inventory.AllParts.Count == 0) 
+                return 1;
+            return Inventory.AllParts.Max(p => p.PartID) + 1;
+        }
         public PartForm()
         {
             InitializeComponent();
+            this.Load += Part_Load;
         }
 
         private void Part_Load(object sender, EventArgs e)
         {
-
+            textBox1.Text = GenerateID().ToString();
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -33,11 +40,39 @@ namespace wgu_968.Forms
         private void button1_Click(object sender, EventArgs e)
         {
             Part part;
+            if (!int.TryParse(inventoryTextBox.Text, out int Instock) ||
+                !decimal.TryParse(priceTextBox.Text, out decimal Price) ||
+                !int.TryParse(minTextBox.Text, out int Min) ||
+                !int.TryParse(maxTextBox.Text, out int Max))
+            {
+                MessageBox.Show("Please enter valid numeric field");
+                return;
+            }
+            if (Min > Max)
+            {
+                MessageBox.Show("Min cannot be larger than Max");
+                return;
+            }
+            if (Instock < Min || Instock > Max)
+            {
+                MessageBox.Show("Inventory must between min and max");
+                return;
+            }
+            if (inHousebtn.Checked)
+            {
+                if (!int.TryParse(machineTextBox.Text, out int MachineId))
+                {
+                    MessageBox.Show("MachineID must be a numeric");
+                    return;
+                }
+            }
+
+
             if (inHousebtn.Checked)
             {
                 part = new Inhouse
                 {
-                    MachineId = int.Parse(machineTextBox.Text)
+                    MachineID = int.Parse(machineTextBox.Text)
                 };
             }
             else
@@ -45,8 +80,9 @@ namespace wgu_968.Forms
                 part = new Outsourced()
                 { CompanyName = machineTextBox.Text };
             }
-            Random rand = new Random();
-            part.PartID = rand.Next(1000,9999);
+
+
+            part.PartID = int.Parse(textBox1.Text);
             part.Name = nameTextBox.Text;
             part.Price = decimal.Parse(priceTextBox.Text);
             part.Instock = int.Parse(inventoryTextBox.Text);

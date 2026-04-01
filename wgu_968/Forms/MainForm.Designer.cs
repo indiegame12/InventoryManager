@@ -56,13 +56,14 @@
             this.dgvParts.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvParts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvParts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dgvParts.Location = new System.Drawing.Point(12, 67);
+            this.dgvParts.Location = new System.Drawing.Point(22, 67);
             this.dgvParts.MultiSelect = false;
             this.dgvParts.Name = "dgvParts";
             this.dgvParts.ReadOnly = true;
             this.dgvParts.Size = new System.Drawing.Size(581, 286);
             this.dgvParts.TabIndex = 0;
-            this.dgvParts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.leftPartsGrid_CellContentClick);
+            this.dgvParts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellContentClick);
+            this.dgvParts.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.myBindingComplete);
             // 
             // dgvProducts
             // 
@@ -71,12 +72,14 @@
             this.dgvProducts.AllowUserToResizeRows = false;
             this.dgvProducts.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProducts.Location = new System.Drawing.Point(620, 69);
+            this.dgvProducts.Location = new System.Drawing.Point(620, 67);
             this.dgvProducts.MultiSelect = false;
             this.dgvProducts.Name = "dgvProducts";
             this.dgvProducts.ReadOnly = true;
             this.dgvProducts.Size = new System.Drawing.Size(604, 286);
             this.dgvProducts.TabIndex = 1;
+            this.dgvProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellContentClick);
+            this.dgvProducts.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dbc);
             // 
             // applicationTitle
             // 
@@ -166,6 +169,7 @@
             this.deleteProductsbtn.TabIndex = 12;
             this.deleteProductsbtn.Text = "Delete";
             this.deleteProductsbtn.UseVisualStyleBackColor = true;
+            this.deleteProductsbtn.Click += new System.EventHandler(this.deleteProductsbtn_Click);
             // 
             // modifyProductbtn
             // 
@@ -195,6 +199,7 @@
             this.searchProductbtn.TabIndex = 14;
             this.searchProductbtn.Text = "Search";
             this.searchProductbtn.UseVisualStyleBackColor = true;
+            this.searchProductbtn.Click += new System.EventHandler(this.searchProductbtn_Click);
             // 
             // inputProductTextField
             // 
@@ -202,6 +207,7 @@
             this.inputProductTextField.Name = "inputProductTextField";
             this.inputProductTextField.Size = new System.Drawing.Size(100, 20);
             this.inputProductTextField.TabIndex = 13;
+            this.inputProductTextField.TextChanged += new System.EventHandler(this.inputProductTextField_TextChanged);
             // 
             // exitbtn
             // 

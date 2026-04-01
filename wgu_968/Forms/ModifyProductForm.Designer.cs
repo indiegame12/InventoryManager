@@ -30,20 +30,20 @@
         {
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvModifyProduct = new System.Windows.Forms.DataGridView();
+            this.dgvModifyParts = new System.Windows.Forms.DataGridView();
             this.button2 = new System.Windows.Forms.Button();
             this.searchPartBtn = new System.Windows.Forms.Button();
             this.inputPartTextField = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.partCancelbtn = new System.Windows.Forms.Button();
             this.partsavebtn = new System.Windows.Forms.Button();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.minbox = new System.Windows.Forms.TextBox();
+            this.maxbox = new System.Windows.Forms.TextBox();
+            this.PriceBox = new System.Windows.Forms.TextBox();
+            this.invbox = new System.Windows.Forms.TextBox();
+            this.namebox = new System.Windows.Forms.TextBox();
+            this.idbox = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.partPriceLA = new System.Windows.Forms.Label();
@@ -51,8 +51,8 @@
             this.partNameLA = new System.Windows.Forms.Label();
             this.partIDLA = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvModifyProduct)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvModifyParts)).BeginInit();
             this.SuspendLayout();
             // 
             // label3
@@ -75,24 +75,39 @@
             this.label2.TabIndex = 83;
             this.label2.Text = "All candidate Parts";
             // 
-            // dataGridView2
+            // dgvModifyProduct
             // 
-            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(297, 323);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(398, 179);
-            this.dataGridView2.TabIndex = 82;
+            this.dgvModifyProduct.AllowUserToAddRows = false;
+            this.dgvModifyProduct.AllowUserToDeleteRows = false;
+            this.dgvModifyProduct.AllowUserToResizeColumns = false;
+            this.dgvModifyProduct.AllowUserToResizeRows = false;
+            this.dgvModifyProduct.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dgvModifyProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvModifyProduct.Location = new System.Drawing.Point(297, 323);
+            this.dgvModifyProduct.MultiSelect = false;
+            this.dgvModifyProduct.Name = "dgvModifyProduct";
+            this.dgvModifyProduct.ReadOnly = true;
+            this.dgvModifyProduct.Size = new System.Drawing.Size(398, 179);
+            this.dgvModifyProduct.TabIndex = 82;
+            this.dgvModifyProduct.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvModifyProduct_DataBindingComplete);
             // 
-            // dataGridView1
+            // dgvModifyParts
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.GridColor = System.Drawing.SystemColors.ControlLight;
-            this.dataGridView1.Location = new System.Drawing.Point(297, 87);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(398, 179);
-            this.dataGridView1.TabIndex = 81;
+            this.dgvModifyParts.AllowUserToAddRows = false;
+            this.dgvModifyParts.AllowUserToDeleteRows = false;
+            this.dgvModifyParts.AllowUserToResizeColumns = false;
+            this.dgvModifyParts.AllowUserToResizeRows = false;
+            this.dgvModifyParts.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dgvModifyParts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvModifyParts.GridColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvModifyParts.Location = new System.Drawing.Point(297, 87);
+            this.dgvModifyParts.MultiSelect = false;
+            this.dgvModifyParts.Name = "dgvModifyParts";
+            this.dgvModifyParts.ReadOnly = true;
+            this.dgvModifyParts.Size = new System.Drawing.Size(398, 179);
+            this.dgvModifyParts.TabIndex = 81;
+            this.dgvModifyParts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dgvModifyParts.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvModifyParts_DataBindingComplete);
             // 
             // button2
             // 
@@ -102,6 +117,7 @@
             this.button2.TabIndex = 80;
             this.button2.Text = "Add";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // searchPartBtn
             // 
@@ -111,6 +127,7 @@
             this.searchPartBtn.TabIndex = 79;
             this.searchPartBtn.Text = "Search";
             this.searchPartBtn.UseVisualStyleBackColor = true;
+            this.searchPartBtn.Click += new System.EventHandler(this.searchPartBtn_Click);
             // 
             // inputPartTextField
             // 
@@ -127,6 +144,7 @@
             this.button1.TabIndex = 77;
             this.button1.Text = "Delete";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // partCancelbtn
             // 
@@ -146,48 +164,50 @@
             this.partsavebtn.TabIndex = 75;
             this.partsavebtn.Text = "Save";
             this.partsavebtn.UseVisualStyleBackColor = true;
+            this.partsavebtn.Click += new System.EventHandler(this.partsavebtn_Click);
             // 
-            // textBox7
+            // minbox
             // 
-            this.textBox7.Location = new System.Drawing.Point(192, 349);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(68, 20);
-            this.textBox7.TabIndex = 74;
+            this.minbox.Location = new System.Drawing.Point(192, 349);
+            this.minbox.Name = "minbox";
+            this.minbox.Size = new System.Drawing.Size(68, 20);
+            this.minbox.TabIndex = 74;
             // 
-            // textBox6
+            // maxbox
             // 
-            this.textBox6.Location = new System.Drawing.Point(81, 352);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(68, 20);
-            this.textBox6.TabIndex = 73;
+            this.maxbox.Location = new System.Drawing.Point(81, 352);
+            this.maxbox.Name = "maxbox";
+            this.maxbox.Size = new System.Drawing.Size(68, 20);
+            this.maxbox.TabIndex = 73;
             // 
-            // textBox4
+            // PriceBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(119, 323);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(106, 20);
-            this.textBox4.TabIndex = 71;
+            this.PriceBox.Location = new System.Drawing.Point(119, 323);
+            this.PriceBox.Name = "PriceBox";
+            this.PriceBox.Size = new System.Drawing.Size(106, 20);
+            this.PriceBox.TabIndex = 71;
             // 
-            // textBox3
+            // invbox
             // 
-            this.textBox3.Location = new System.Drawing.Point(119, 297);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(106, 20);
-            this.textBox3.TabIndex = 70;
+            this.invbox.Location = new System.Drawing.Point(119, 297);
+            this.invbox.Name = "invbox";
+            this.invbox.Size = new System.Drawing.Size(106, 20);
+            this.invbox.TabIndex = 70;
             // 
-            // textBox2
+            // namebox
             // 
-            this.textBox2.Location = new System.Drawing.Point(119, 267);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(106, 20);
-            this.textBox2.TabIndex = 69;
+            this.namebox.Location = new System.Drawing.Point(119, 267);
+            this.namebox.Name = "namebox";
+            this.namebox.Size = new System.Drawing.Size(106, 20);
+            this.namebox.TabIndex = 69;
             // 
-            // textBox1
+            // idbox
             // 
-            this.textBox1.Location = new System.Drawing.Point(119, 241);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(106, 20);
-            this.textBox1.TabIndex = 68;
+            this.idbox.Location = new System.Drawing.Point(119, 241);
+            this.idbox.Name = "idbox";
+            this.idbox.ReadOnly = true;
+            this.idbox.Size = new System.Drawing.Size(106, 20);
+            this.idbox.TabIndex = 68;
             // 
             // label7
             // 
@@ -260,20 +280,20 @@
             this.ClientSize = new System.Drawing.Size(706, 623);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.dataGridView2);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvModifyProduct);
+            this.Controls.Add(this.dgvModifyParts);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.searchPartBtn);
             this.Controls.Add(this.inputPartTextField);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.partCancelbtn);
             this.Controls.Add(this.partsavebtn);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.minbox);
+            this.Controls.Add(this.maxbox);
+            this.Controls.Add(this.PriceBox);
+            this.Controls.Add(this.invbox);
+            this.Controls.Add(this.namebox);
+            this.Controls.Add(this.idbox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.partPriceLA);
@@ -283,8 +303,9 @@
             this.Controls.Add(this.label1);
             this.Name = "ModifyProductForm";
             this.Text = "Product";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.ModifyProductForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvModifyProduct)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvModifyParts)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -294,20 +315,20 @@
 
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvModifyProduct;
+        private System.Windows.Forms.DataGridView dgvModifyParts;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button searchPartBtn;
         private System.Windows.Forms.TextBox inputPartTextField;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button partCancelbtn;
         private System.Windows.Forms.Button partsavebtn;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox minbox;
+        private System.Windows.Forms.TextBox maxbox;
+        private System.Windows.Forms.TextBox PriceBox;
+        private System.Windows.Forms.TextBox invbox;
+        private System.Windows.Forms.TextBox namebox;
+        private System.Windows.Forms.TextBox idbox;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label partPriceLA;

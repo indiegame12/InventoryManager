@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using wgu_968.Forms;
 using wgu_968.model;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace wgu_968
 {
@@ -18,10 +19,11 @@ namespace wgu_968
         public mainForm()
         {
             InitializeComponent();
-            dgvParts.DataSource = Inventory.Parts;
+            dgvParts.DataSource = Inventory.AllParts;
             dgvProducts.DataSource = Inventory.Products;
             
             dgvParts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             
         }
 
@@ -42,11 +44,11 @@ namespace wgu_968
 
         private void button1_Click(object sender, EventArgs e)
         {
-            dgvParts.ClearSelection();
+            
             if (inputPartTextField.Text != "")
             {
                 int partId = Convert.ToInt32(inputPartTextField.Text);
-                Part part = Inventory.SearchPart(partId);
+                Part part = Inventory.lookupPart(partId);
                 if (part != null)
                 {
                     
@@ -60,8 +62,8 @@ namespace wgu_968
             }
             else
             {
-               dgvParts.ClearSelection();
-               dgvParts.DataSource = Inventory.Parts;
+               
+               dgvParts.DataSource = Inventory.AllParts;
                
             }
             
@@ -97,7 +99,9 @@ namespace wgu_968
             ModifyForm form = new ModifyForm(chosenPart, index);
             form.ShowDialog();
 
-            //new ModifyForm().ShowDialog();
+            dgvParts.DataSource = null;
+            dgvParts.DataSource = Inventory.AllParts;
+          
         }
 
         private void addProductbtn_Click(object sender, EventArgs e)
@@ -107,7 +111,19 @@ namespace wgu_968
 
         private void modifyProductbtn_Click(object sender, EventArgs e)
         {
-            new ModifyProductForm().ShowDialog();
+            dgvProducts.ClearSelection();
+            if (dgvProducts.CurrentRow == null)
+            {
+                MessageBox.Show("Select Product first");
+                return;
+            }
+            int index = dgvProducts.CurrentRow.Index;
+            Product chosenPart = (Product)dgvProducts.CurrentRow.DataBoundItem;
+            ModifyProductForm form = new ModifyProductForm(chosenPart, index);
+            form.ShowDialog();
+
+            dgvProducts.DataSource = null;
+            dgvProducts.DataSource = Inventory.Products;
         }
 
         private void exitbtn_Click(object sender, EventArgs e)
@@ -117,14 +133,33 @@ namespace wgu_968
 
         private void deletePartbtn_Click(object sender, EventArgs e)
         {
+            
+            
+
             if (dgvParts.CurrentRow != null && dgvParts.CurrentRow.DataBoundItem is Part part)
             {
-               
-                
-                bool deleted = Inventory.DeletePart(part);
-                if (!deleted)
+                foreach (Product product in Inventory.Products)
                 {
-                    MessageBox.Show("Part could not be deleted.", "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if (product.AssociatedParts.Contains(part))
+                    {
+                        MessageBox.Show("Part is asscociated with a Product.");
+                        return;
+                    }
+                }
+
+                DialogResult result = MessageBox.Show(
+                    "Are you sure. Deletion cannot be reversed!",
+                    "Deletion confirm?",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    bool deleted = Inventory.DeletePart(part);
+
+                    if (!deleted)
+                    {
+                        MessageBox.Show("Part could not be deleted.", "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
             }
             else
@@ -132,5 +167,79 @@ namespace wgu_968
                 MessageBox.Show("No part selected.", "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void dgvProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void deleteProductsbtn_Click(object sender, EventArgs e)
+        {
+            if (dgvProducts.CurrentRow != null && dgvProducts.CurrentRow.DataBoundItem is Product product)
+            {
+                DialogResult result = MessageBox.Show(
+                    "Are you sure. Deletion Cannot be reversed!",
+                    "Deletion confirm?",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+
+                    bool deleted = Inventory.RemoveProduct(product.ProductID);
+                    if (!deleted)
+                    {
+                        MessageBox.Show("Part could not be deleted.", "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No part selected.", "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void searchProductbtn_Click(object sender, EventArgs e)
+        {
+            dgvProducts.ClearSelection();
+            if (inputProductTextField.Text != "")
+            {
+                int productId = Convert.ToInt32(inputProductTextField.Text);
+                Product product = Inventory.lookupProduct(productId);
+                if (product != null)
+                {
+
+                    dgvProducts.DataSource = new List<Product> { product };
+                }
+                else
+                {
+                    MessageBox.Show("Part does not exist");
+                }
+
+            }
+            else
+            {
+                dgvProducts.ClearSelection();
+                dgvProducts.DataSource = Inventory.Products;
+
+            }
+
+        }
+
+        private void inputProductTextField_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void myBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            dgvParts.ClearSelection();
+        }
+
+        private void dbc(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            dgvProducts.ClearSelection();
+        }
     }
-}
+    }
+    
+
