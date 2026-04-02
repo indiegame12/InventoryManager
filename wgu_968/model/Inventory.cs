@@ -2,13 +2,13 @@
 using System.ComponentModel;
 using System.Linq;
 
-
 namespace wgu_968.model
 {
     public class Inventory
     {
         public static BindingList<Part> AllParts = new BindingList<Part>();
-        public static BindingList <Product> Products = new BindingList<Product>();
+        public static BindingList<Product> Products = new BindingList<Product>();
+
         public static void AddProduct(Product product) => Products.Add(product);
 
         public static bool RemoveProduct(int productId)
@@ -20,17 +20,18 @@ namespace wgu_968.model
                 return true;
             }
             return false;
-           
         }
 
-        public static  Product lookupProduct(int productId)
+        public static Product lookupProduct(int productId)
         {
-           var SearchProduct = Products.FirstOrDefault(product => product.ProductID == productId);
+            var SearchProduct = Products.FirstOrDefault(product => product.ProductID == productId);
             return SearchProduct;
         }
-            
-        public static void AddPart( Part part) => AllParts.Add(part);
-        public static bool DeletePart(Part part ) => AllParts.Remove(part);
+
+        public static void AddPart(Part part) => AllParts.Add(part);
+
+        public static bool DeletePart(Part part) => AllParts.Remove(part);
+
         public static Part lookupPart(int partId)
         {
             var SearchPart = AllParts.FirstOrDefault(part => part.PartID == partId);
@@ -53,6 +54,7 @@ namespace wgu_968.model
                 AllParts[index] = part;
             }
         }
+
         public static void UpdateProduct(int productId, Product product)
         {
             int index = -1;

@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using wgu_968.Forms;
 using wgu_968.model;
 
-
 namespace wgu_968
 {
     public partial class mainForm : Form
@@ -15,65 +14,56 @@ namespace wgu_968
             InitializeComponent();
             dgvParts.DataSource = Inventory.AllParts;
             dgvProducts.DataSource = Inventory.Products;
-            
+
             dgvParts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void Products_Click(object sender, EventArgs e)
         {
-
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-           
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
             if (inputPartTextField.Text != "")
             {
                 int partId = Convert.ToInt32(inputPartTextField.Text);
                 Part part = Inventory.lookupPart(partId);
                 if (part != null)
                 {
-                    
                     dgvParts.DataSource = new List<Part> { part };
                 }
                 else
                 {
                     MessageBox.Show("Part does not exist");
                 }
-
             }
             else
             {
-               dgvParts.DataSource = Inventory.AllParts;
+                dgvParts.DataSource = Inventory.AllParts;
             }
-            
         }
 
         private void leftPartsGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
         }
+
         private void addpartbtn_Click(object sender, EventArgs e)
         {
             new PartForm().ShowDialog();
             dgvParts.ClearSelection();
-
         }
 
         private void mainForm_Load(object sender, EventArgs e)
         {
-
         }
 
         private void modifypartbtn_Click(object sender, EventArgs e)
@@ -81,7 +71,7 @@ namespace wgu_968
             dgvParts.ClearSelection();
             if (dgvParts.CurrentRow == null)
             {
-                MessageBox.Show("select part first"); 
+                MessageBox.Show("select part first");
                 return;
             }
             int index = dgvParts.CurrentRow.Index;
@@ -91,7 +81,6 @@ namespace wgu_968
 
             dgvParts.DataSource = null;
             dgvParts.DataSource = Inventory.AllParts;
-          
         }
 
         private void addProductbtn_Click(object sender, EventArgs e)
@@ -157,19 +146,18 @@ namespace wgu_968
 
         private void dgvProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
 
         private void deleteProductsbtn_Click(object sender, EventArgs e)
         {
             if (dgvProducts.CurrentRow != null && dgvProducts.CurrentRow.DataBoundItem is Product product)
             {
-                    if (product.AssociatedParts.Count > 0)
-                    {
-                        MessageBox.Show("Product can't be deleted because a part is assigned to it.");
-                        return;
-                    }
-                
+                if (product.AssociatedParts.Count > 0)
+                {
+                    MessageBox.Show("Product can't be deleted because a part is assigned to it.");
+                    return;
+                }
+
                 DialogResult result = MessageBox.Show(
                     "Are you sure. Deletion Cannot be reversed!",
                     "Deletion confirm?",
@@ -177,7 +165,6 @@ namespace wgu_968
                     MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
-
                     bool deleted = Inventory.RemoveProduct(product.ProductID);
                     if (!deleted)
                     {
@@ -200,27 +187,22 @@ namespace wgu_968
                 Product product = Inventory.lookupProduct(productId);
                 if (product != null)
                 {
-
                     dgvProducts.DataSource = new List<Product> { product };
                 }
                 else
                 {
                     MessageBox.Show("Part does not exist");
                 }
-
             }
             else
             {
                 dgvProducts.ClearSelection();
                 dgvProducts.DataSource = Inventory.Products;
-
             }
-
         }
 
         private void inputProductTextField_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void myBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -233,5 +215,4 @@ namespace wgu_968
             dgvProducts.ClearSelection();
         }
     }
-    }
-
+}

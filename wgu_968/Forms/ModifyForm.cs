@@ -33,8 +33,6 @@ namespace wgu_968.Forms
                 Machine.Text = "CompanyName";
                 textBox5.Text = outsourced.CompanyName.ToString();
             }
-
-           
         }
 
         private void inHousebtn_CheckedChanged(object sender, EventArgs e)
@@ -54,13 +52,12 @@ namespace wgu_968.Forms
 
         private void ModifyForm_Load(object sender, EventArgs e)
         {
-
         }
 
         private void partsavebtn_Click(object sender, EventArgs e)
         {
             Part part;
-            if (!int.TryParse(textBox3.Text, out int Instock))    
+            if (!int.TryParse(textBox3.Text, out int Instock))
             {
                 MessageBox.Show("Inventory field must be a Number/Interger");
                 return;
@@ -69,14 +66,13 @@ namespace wgu_968.Forms
             {
                 MessageBox.Show("Price field must be a Decimal/Number");
                 return;
-
             }
             if (string.IsNullOrWhiteSpace(textBox7.Text))
             {
                 MessageBox.Show("Min field must not be empty");
                 return;
             }
-                if (!int.TryParse(textBox7.Text, out int Min))
+            if (!int.TryParse(textBox7.Text, out int Min))
             {
                 MessageBox.Show("Min field must be a number.");
                 return;
@@ -86,8 +82,8 @@ namespace wgu_968.Forms
                 MessageBox.Show("Max field must be a number.");
                 return;
             }
-                if (Min > Max)
-            
+            if (Min > Max)
+
             {
                 MessageBox.Show("Min cannot be larger than Max");
                 return;
@@ -109,7 +105,7 @@ namespace wgu_968.Forms
             if (inHousebtn.Checked)
             {
                 part = new Inhouse();
-             
+
                 ((Inhouse)part).MachineID = int.Parse(textBox5.Text);
             }
             else
@@ -121,19 +117,16 @@ namespace wgu_968.Forms
             part.PartID = orginalPart.PartID;
             part.Name = textBox2.Text;
             part.Instock = int.Parse(textBox3.Text);
-            part.Price = decimal.Parse(textBox4.Text);   
+            part.Price = decimal.Parse(textBox4.Text);
             part.Min = int.Parse(textBox7.Text);
             part.Max = int.Parse(textBox6.Text);
 
             Inventory.updatePart(orginalPart.PartID, part);
             this.Close();
-            
         }
-
 
         private void Machine_Click(object sender, EventArgs e)
         {
-
         }
     }
 }

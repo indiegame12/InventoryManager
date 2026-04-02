@@ -13,6 +13,7 @@ namespace wgu_968.Forms
         private Product orginalProduct;
         private int productindex;
         private BindingList<Part> tempoaryStorageForAssociatedParts;
+
         public ModifyProductForm(Product selectedProduct, int index)
         {
             InitializeComponent();
@@ -38,7 +39,6 @@ namespace wgu_968.Forms
 
         private void ModifyProductForm_Load(object sender, EventArgs e)
         {
-
         }
 
         private void partsavebtn_Click(object sender, EventArgs e)
@@ -49,7 +49,6 @@ namespace wgu_968.Forms
                 MessageBox.Show("Inventory field must be a Number/Interger");
                 return;
             }
-
 
             if (!decimal.TryParse(PriceBox.Text, out decimal Price))
             {
@@ -63,12 +62,11 @@ namespace wgu_968.Forms
                 return;
             }
 
-                if (!int.TryParse(minbox.Text, out int Min))
+            if (!int.TryParse(minbox.Text, out int Min))
             {
                 MessageBox.Show("Min field must be a number.");
                 return;
             }
-
 
             if (!int.TryParse(maxbox.Text, out int Max))
             {
@@ -76,13 +74,11 @@ namespace wgu_968.Forms
                 return;
             }
 
-
-            if (Min > Max) 
+            if (Min > Max)
             {
                 MessageBox.Show("Min cannot be larger than Max");
                 return;
             }
-
 
             if (Instock < Min || Instock > Max)
             {
@@ -104,7 +100,6 @@ namespace wgu_968.Forms
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -136,22 +131,18 @@ namespace wgu_968.Forms
                 Part part = Inventory.lookupPart(partId);
                 if (part != null)
                 {
-
                     dgvModifyParts.DataSource = new List<Part> { part };
                 }
                 else
                 {
                     MessageBox.Show("Part does not exist");
                 }
-
             }
             else
             {
                 dgvModifyParts.ClearSelection();
                 dgvModifyParts.DataSource = Inventory.AllParts;
-
             }
-
         }
 
         private void dgvModifyParts_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -164,5 +155,4 @@ namespace wgu_968.Forms
             dgvModifyProduct.ClearSelection();
         }
     }
-    }
-
+}

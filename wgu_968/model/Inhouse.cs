@@ -2,8 +2,8 @@
 
 namespace wgu_968.model
 {
-    public class Inhouse: Part
+    public class Inhouse : Part
     {
-       public int MachineID { get; set; }
+        public int MachineID { get; set; }
     }
 }

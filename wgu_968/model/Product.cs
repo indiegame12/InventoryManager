@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Linq;
 
-
 namespace wgu_968.model
 {
     public class Product
@@ -19,22 +18,21 @@ namespace wgu_968.model
         {
             AssociatedParts.Add(part);
         }
+
         public bool RemoveassociatedPart(int partID)
         {
-         var part = LookupAssociatedPart(partID);
+            var part = LookupAssociatedPart(partID);
             if (part != null)
             {
                 AssociatedParts.Remove(part);
                 return true;
             }
-         return false;
+            return false;
         }
+
         public Part LookupAssociatedPart(int partID)
-        { 
+        {
             return AssociatedParts.FirstOrDefault(associatedPart => associatedPart.PartID == partID);
         }
-
-
-
     }
 }

@@ -2,9 +2,9 @@
 
 namespace InventoryManager.model
 {
-   public abstract class Part
-    { 
-        public int PartID{ get; set; } 
+    public abstract class Part
+    {
+        public int PartID { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int Instock { get; set; }
@@ -12,7 +12,5 @@ namespace InventoryManager.model
         public int Max { get; set; }
 
         public static BindingList<Part> parts = new BindingList<Part>();
-
-        
     }
 }
