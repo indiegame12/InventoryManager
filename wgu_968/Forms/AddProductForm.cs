@@ -2,11 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using System.Windows.Forms;
 using wgu_968.model;
 
@@ -79,22 +77,44 @@ namespace wgu_968.Forms
         private void partsavebtn_Click(object sender, EventArgs e)
         {
             Product product = new Product();
-            if (!int.TryParse(InventoryBox.Text, out int Instock) ||
-                !decimal.TryParse(PriceBox1.Text, out decimal Price) ||
-                !int.TryParse(MinBox.Text, out int Min) ||
-                !int.TryParse(MaxBox.Text, out int Max))
+            if (!int.TryParse(InventoryBox.Text, out int Instock))
             {
-                MessageBox.Show("Please enter valid numeric field");
+                MessageBox.Show("Inventory field must be a Number/Interger");
+                return;}
+
+
+            if (!decimal.TryParse(PriceBox1.Text, out decimal Price))
+            {
+                MessageBox.Show("Price field must be a Decimal/Number");
                 return;
             }
-            if (Min > Max)
+            if (string.IsNullOrWhiteSpace(MinBox.Text))
+            {
+                MessageBox.Show("Min field must not be empty");
+                return;
+            }
+
+                if (!int.TryParse(MinBox.Text, out int Min))
+            {
+                MessageBox.Show("Min field must be a number.");
+                return;
+            }
+
+            if (!int.TryParse(MaxBox.Text, out int Max))
+            {
+                MessageBox.Show("Max field must be a number.");
+                return;
+            }
+
+                if (Min > Max)
             {
                 MessageBox.Show("Min cannot be larger than Max");
                 return;
             }
+
             if (Instock < Min || Instock > Max)
             {
-                MessageBox.Show("Inventory must between min and max");
+                MessageBox.Show("Inventory is outside the min/max range");
                 return;
             }
 

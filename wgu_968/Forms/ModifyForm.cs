@@ -38,7 +38,7 @@ namespace wgu_968.Forms
             {
                 OutSourcedbtn.Checked = true;
                 Machine.Text = "CompanyName";
-                textBox5.Text = outsourced.CompanyName;
+                textBox5.Text = outsourced.CompanyName.ToString();
             }
 
            
@@ -67,22 +67,41 @@ namespace wgu_968.Forms
         private void partsavebtn_Click(object sender, EventArgs e)
         {
             Part part;
-            if (!int.TryParse(textBox3.Text, out int Instock) ||
-                !decimal.TryParse(textBox4.Text, out decimal Price) ||
-                !int.TryParse(textBox7.Text, out int Min) ||
-                !int.TryParse(textBox6.Text, out int Max))
+            if (!int.TryParse(textBox3.Text, out int Instock))    
             {
-                MessageBox.Show("Please enter valid numeric field");
+                MessageBox.Show("Inventory field must be a Number/Interger");
                 return;
             }
-            if (Min > Max)
+            if (!decimal.TryParse(textBox4.Text, out decimal Price))
+            {
+                MessageBox.Show("Price field must be a Decimal/Number");
+                return;
+
+            }
+            if (string.IsNullOrWhiteSpace(textBox7.Text))
+            {
+                MessageBox.Show("Min field must not be empty");
+                return;
+            }
+                if (!int.TryParse(textBox7.Text, out int Min))
+            {
+                MessageBox.Show("Min field must be a number.");
+                return;
+            }
+            if (!int.TryParse(textBox6.Text, out int Max))
+            {
+                MessageBox.Show("Max field must be a number.");
+                return;
+            }
+                if (Min > Max)
+            
             {
                 MessageBox.Show("Min cannot be larger than Max");
                 return;
             }
             if (Instock < Min || Instock > Max)
             {
-                MessageBox.Show("Inventory must between min and max");
+                MessageBox.Show("Inventory is outside of min/max range");
                 return;
             }
             if (inHousebtn.Checked)
@@ -103,13 +122,13 @@ namespace wgu_968.Forms
             else
             {
                 part = new Outsourced();
-                ((Outsourced)part).CompanyName = textBox5.Text;
+                ((Outsourced)part).CompanyName = textBox5.Text.ToString();
             }
 
             part.PartID = orginalPart.PartID;
             part.Name = textBox2.Text;
             part.Instock = int.Parse(textBox3.Text);
-            part.Price = int.Parse(textBox4.Text);   
+            part.Price = decimal.Parse(textBox4.Text);   
             part.Min = int.Parse(textBox7.Text);
             part.Max = int.Parse(textBox6.Text);
 
@@ -117,6 +136,7 @@ namespace wgu_968.Forms
             this.Close();
             
         }
+
 
         private void Machine_Click(object sender, EventArgs e)
         {

@@ -1,16 +1,11 @@
 ﻿using InventoryManager.model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using System.Windows.Forms;
 using wgu_968.Forms;
 using wgu_968.model;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 
 namespace wgu_968
 {
@@ -177,6 +172,15 @@ namespace wgu_968
         {
             if (dgvProducts.CurrentRow != null && dgvProducts.CurrentRow.DataBoundItem is Product product)
             {
+                
+                
+                
+                    if (product.AssociatedParts.Count > 0)
+                    {
+                        MessageBox.Show("Product can't be deleted because a part is assigned to it.");
+                        return;
+                    }
+                
                 DialogResult result = MessageBox.Show(
                     "Are you sure. Deletion Cannot be reversed!",
                     "Deletion confirm?",
@@ -241,5 +245,4 @@ namespace wgu_968
         }
     }
     }
-    
 

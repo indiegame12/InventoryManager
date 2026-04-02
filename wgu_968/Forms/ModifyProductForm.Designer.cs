@@ -87,7 +87,7 @@
             this.dgvModifyProduct.MultiSelect = false;
             this.dgvModifyProduct.Name = "dgvModifyProduct";
             this.dgvModifyProduct.ReadOnly = true;
-            this.dgvModifyProduct.Size = new System.Drawing.Size(398, 179);
+            this.dgvModifyProduct.Size = new System.Drawing.Size(614, 179);
             this.dgvModifyProduct.TabIndex = 82;
             this.dgvModifyProduct.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvModifyProduct_DataBindingComplete);
             // 
@@ -104,14 +104,14 @@
             this.dgvModifyParts.MultiSelect = false;
             this.dgvModifyParts.Name = "dgvModifyParts";
             this.dgvModifyParts.ReadOnly = true;
-            this.dgvModifyParts.Size = new System.Drawing.Size(398, 179);
+            this.dgvModifyParts.Size = new System.Drawing.Size(614, 179);
             this.dgvModifyParts.TabIndex = 81;
             this.dgvModifyParts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dgvModifyParts.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvModifyParts_DataBindingComplete);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(625, 272);
+            this.button2.Location = new System.Drawing.Point(863, 279);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(48, 31);
             this.button2.TabIndex = 80;
@@ -121,7 +121,7 @@
             // 
             // searchPartBtn
             // 
-            this.searchPartBtn.Location = new System.Drawing.Point(441, 52);
+            this.searchPartBtn.Location = new System.Drawing.Point(657, 50);
             this.searchPartBtn.Name = "searchPartBtn";
             this.searchPartBtn.Size = new System.Drawing.Size(69, 23);
             this.searchPartBtn.TabIndex = 79;
@@ -131,14 +131,14 @@
             // 
             // inputPartTextField
             // 
-            this.inputPartTextField.Location = new System.Drawing.Point(516, 54);
+            this.inputPartTextField.Location = new System.Drawing.Point(732, 52);
             this.inputPartTextField.Name = "inputPartTextField";
             this.inputPartTextField.Size = new System.Drawing.Size(179, 20);
             this.inputPartTextField.TabIndex = 78;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(624, 524);
+            this.button1.Location = new System.Drawing.Point(840, 525);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(71, 31);
             this.button1.TabIndex = 77;
@@ -148,7 +148,7 @@
             // 
             // partCancelbtn
             // 
-            this.partCancelbtn.Location = new System.Drawing.Point(620, 566);
+            this.partCancelbtn.Location = new System.Drawing.Point(836, 567);
             this.partCancelbtn.Name = "partCancelbtn";
             this.partCancelbtn.Size = new System.Drawing.Size(75, 31);
             this.partCancelbtn.TabIndex = 76;
@@ -158,7 +158,7 @@
             // 
             // partsavebtn
             // 
-            this.partsavebtn.Location = new System.Drawing.Point(543, 566);
+            this.partsavebtn.Location = new System.Drawing.Point(759, 567);
             this.partsavebtn.Name = "partsavebtn";
             this.partsavebtn.Size = new System.Drawing.Size(71, 31);
             this.partsavebtn.TabIndex = 75;
@@ -232,9 +232,9 @@
             this.partPriceLA.AutoSize = true;
             this.partPriceLA.Location = new System.Drawing.Point(48, 323);
             this.partPriceLA.Name = "partPriceLA";
-            this.partPriceLA.Size = new System.Drawing.Size(63, 13);
+            this.partPriceLA.Size = new System.Drawing.Size(31, 13);
             this.partPriceLA.TabIndex = 64;
-            this.partPriceLA.Text = "Price / Cost";
+            this.partPriceLA.Text = "Price";
             // 
             // partINVLA
             // 
@@ -277,7 +277,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(706, 623);
+            this.ClientSize = new System.Drawing.Size(945, 623);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dgvModifyProduct);

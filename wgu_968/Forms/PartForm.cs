@@ -40,14 +40,34 @@ namespace wgu_968.Forms
         private void button1_Click(object sender, EventArgs e)
         {
             Part part;
-            if (!int.TryParse(inventoryTextBox.Text, out int Instock) ||
-                !decimal.TryParse(priceTextBox.Text, out decimal Price) ||
-                !int.TryParse(minTextBox.Text, out int Min) ||
-                !int.TryParse(maxTextBox.Text, out int Max))
+            if (!int.TryParse(inventoryTextBox.Text, out int Instock)) 
             {
-                MessageBox.Show("Please enter valid numeric field");
+                MessageBox.Show("Inventory field must be a Number/Interger");
+                return;}
+
+            if (!decimal.TryParse(priceTextBox.Text, out decimal Price))
+            {
+                MessageBox.Show("Price field must be a Decimal/Number");
+                return;
+
+            }
+            if (string.IsNullOrWhiteSpace(minTextBox.Text))
+            {
+                MessageBox.Show("Min field must not be empty");
                 return;
             }
+            if (!int.TryParse(minTextBox.Text, out int Min))
+            {
+                MessageBox.Show("Min field must be a number.");
+                return; 
+            }
+
+            if (!int.TryParse(maxTextBox.Text, out int Max))
+            {
+                MessageBox.Show("Max field must be a number.");
+                return;
+            }
+
             if (Min > Max)
             {
                 MessageBox.Show("Min cannot be larger than Max");
@@ -55,7 +75,7 @@ namespace wgu_968.Forms
             }
             if (Instock < Min || Instock > Max)
             {
-                MessageBox.Show("Inventory must between min and max");
+                MessageBox.Show("Inventory is outside the min/max range");
                 return;
             }
             if (inHousebtn.Checked)
