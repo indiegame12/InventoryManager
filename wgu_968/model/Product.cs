@@ -31,7 +31,7 @@ namespace wgu_968.model
         }
         public Part LookupAssociatedPart(int partID)
         { 
-            return AssociatedParts.FirstOrDefault(p => p.PartID == partID);
+            return AssociatedParts.FirstOrDefault(associatedPart => associatedPart.PartID == partID);
         }
 
 
