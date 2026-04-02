@@ -140,7 +140,7 @@ namespace wgu_968.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var assocaitedPart = (Part)dataGridView2.CurrentRow.DataBoundItem;
+            var selectedAssocaitedPart = (Part)dataGridView2.CurrentRow.DataBoundItem;
             DialogResult result = MessageBox.Show(
                   "Are you sure. Associated part will be deleted.",
                   "Deletion confirm?",
@@ -148,7 +148,7 @@ namespace wgu_968.Forms
                   MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
-                tempoaryStorageForAssociatedParts.Remove(assocaitedPart);
+                tempoaryStorageForAssociatedParts.Remove(selectedAssocaitedPart);
             }
         }
 
