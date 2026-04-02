@@ -2,9 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-
 using System.Linq;
-
 using System.Windows.Forms;
 using wgu_968.model;
 
@@ -14,14 +12,14 @@ namespace wgu_968.Forms
     {
         private Product orginalProduct;
         private int productindex;
-        private BindingList<Part> tempParts;
+        private BindingList<Part> tempoaryStorageForAssociatedParts;
         public ModifyProductForm(Product selectedProduct, int index)
         {
             InitializeComponent();
             dgvModifyParts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvModifyProduct.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvModifyParts.DataSource = Inventory.AllParts;
-            tempParts = new BindingList<Part>(selectedProduct.AssociatedParts.ToList());
+            tempoaryStorageForAssociatedParts = new BindingList<Part>(selectedProduct.AssociatedParts.ToList());
             orginalProduct = selectedProduct;
             productindex = index;
             idbox.Text = selectedProduct.ProductID.ToString();
@@ -30,7 +28,7 @@ namespace wgu_968.Forms
             PriceBox.Text = selectedProduct.Price.ToString();
             minbox.Text = selectedProduct.Min.ToString();
             maxbox.Text = selectedProduct.Max.ToString();
-            dgvModifyProduct.DataSource = tempParts;
+            dgvModifyProduct.DataSource = tempoaryStorageForAssociatedParts;
         }
 
         private void partCancelbtn_Click(object sender, EventArgs e)
@@ -98,7 +96,7 @@ namespace wgu_968.Forms
             product.Price = decimal.Parse(PriceBox.Text);
             product.Min = int.Parse(minbox.Text);
             product.Max = int.Parse(maxbox.Text);
-            product.AssociatedParts = tempParts;
+            product.AssociatedParts = tempoaryStorageForAssociatedParts;
 
             Inventory.UpdateProduct(orginalProduct.ProductID, product);
             this.Close();
@@ -112,7 +110,7 @@ namespace wgu_968.Forms
         private void button2_Click(object sender, EventArgs e)
         {
             var part = (Part)dgvModifyParts.CurrentRow.DataBoundItem;
-            tempParts.Add(part);
+            tempoaryStorageForAssociatedParts.Add(part);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -125,7 +123,7 @@ namespace wgu_968.Forms
                  MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
-                tempParts.Remove(assocaitedPart);
+                tempoaryStorageForAssociatedParts.Remove(assocaitedPart);
             }
         }
 

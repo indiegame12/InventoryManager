@@ -1,7 +1,6 @@
 ﻿using InventoryManager.model;
 using System;
 using System.Collections.Generic;
-
 using System.Windows.Forms;
 using wgu_968.Forms;
 using wgu_968.model;
@@ -57,18 +56,14 @@ namespace wgu_968
             }
             else
             {
-               
                dgvParts.DataSource = Inventory.AllParts;
-               
             }
             
         }
 
         private void leftPartsGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
-
         private void addpartbtn_Click(object sender, EventArgs e)
         {
             new PartForm().ShowDialog();
@@ -128,9 +123,6 @@ namespace wgu_968
 
         private void deletePartbtn_Click(object sender, EventArgs e)
         {
-            
-            
-
             if (dgvParts.CurrentRow != null && dgvParts.CurrentRow.DataBoundItem is Part part)
             {
                 foreach (Product product in Inventory.Products)
@@ -172,9 +164,6 @@ namespace wgu_968
         {
             if (dgvProducts.CurrentRow != null && dgvProducts.CurrentRow.DataBoundItem is Product product)
             {
-                
-                
-                
                     if (product.AssociatedParts.Count > 0)
                     {
                         MessageBox.Show("Product can't be deleted because a part is assigned to it.");

@@ -1,19 +1,15 @@
 ﻿using System.ComponentModel;
-using InventoryManager.model;
-
 
 namespace InventoryManager.model
 {
    public abstract class Part
-    {
-        
+    { 
         public int PartID{ get; set; } 
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int Instock { get; set; }
         public int Min { get; set; }
         public int Max { get; set; }
-
 
         public static BindingList<Part> parts = new BindingList<Part>();
 

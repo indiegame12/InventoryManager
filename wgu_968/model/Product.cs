@@ -1,10 +1,7 @@
 ﻿using InventoryManager.model;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace wgu_968.model
 {
@@ -21,7 +18,6 @@ namespace wgu_968.model
         public void AddassociatedPart(Part part)
         {
             AssociatedParts.Add(part);
-
         }
         public bool RemoveassociatedPart(int partID)
         {
@@ -33,7 +29,6 @@ namespace wgu_968.model
             }
          return false;
         }
-
         public Part LookupAssociatedPart(int partID)
         { 
             return AssociatedParts.FirstOrDefault(p => p.PartID == partID);

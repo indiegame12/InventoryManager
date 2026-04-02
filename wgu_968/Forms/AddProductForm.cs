@@ -2,17 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-
 using System.Linq;
-
 using System.Windows.Forms;
 using wgu_968.model;
-
 namespace wgu_968.Forms
 {
     public partial class AddProductForm : Form
     {
-        private BindingList<Part> tempParts = new BindingList<Part>();
+        private BindingList<Part> tempoaryStorageForAssociatedParts = new BindingList<Part>();
         private int GenerateID()
         {
             if (Inventory.Products.Count == 0)
@@ -27,7 +24,7 @@ namespace wgu_968.Forms
             dgvAddProduct.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             
 
-            dataGridView2.DataSource = tempParts;
+            dataGridView2.DataSource = tempoaryStorageForAssociatedParts;
             dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
@@ -128,7 +125,7 @@ namespace wgu_968.Forms
             product.Min = int.Parse(MinBox.Text);
             product.Max = int.Parse(MaxBox.Text);
 
-            foreach (Part part in tempParts)
+            foreach (Part part in tempoaryStorageForAssociatedParts)
             {
                 product.AssociatedParts.Add(part);
      
@@ -147,7 +144,7 @@ namespace wgu_968.Forms
         {
             Product product = new Product();    
             var part = (Part)dgvAddProduct.CurrentRow.DataBoundItem;
-            tempParts.Add(part);
+            tempoaryStorageForAssociatedParts.Add(part);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -161,7 +158,7 @@ namespace wgu_968.Forms
                   MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
-                tempParts.Remove(assocaitedPart);
+                tempoaryStorageForAssociatedParts.Remove(assocaitedPart);
             }
         }
 
