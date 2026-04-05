@@ -127,7 +127,16 @@ namespace wgu_968.Forms
             dgvModifyParts.ClearSelection();
             if (inputPartTextField.Text != "")
             {
-                int partId = Convert.ToInt32(inputPartTextField.Text);
+                int partId;
+
+                if (!int.TryParse(inputPartTextField.Text, out partId))
+                {
+                    MessageBox.Show("Only numbers can be entered into the search. Example 8");
+       
+                    return;
+                }
+
+                partId = Convert.ToInt32(inputPartTextField.Text);
                 Part part = Inventory.lookupPart(partId);
                 if (part != null)
                 {

@@ -33,17 +33,27 @@ namespace wgu_968
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (inputPartTextField.Text != "")
+            if (!string.IsNullOrWhiteSpace(inputPartTextField.Text))
             {
-                int partId = Convert.ToInt32(inputPartTextField.Text);
-                Part part = Inventory.lookupPart(partId);
-                if (part != null)
+                int partId;
+
+                if (int.TryParse(inputPartTextField.Text, out partId))
                 {
-                    dgvParts.DataSource = new List<Part> { part };
+                    Part part = Inventory.lookupPart(partId);
+
+                    if (part != null)
+                    {
+                        dgvParts.DataSource = new List<Part> { part };
+                    }
+                    else
+                    {
+                        MessageBox.Show("Part does not exist");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Part does not exist");
+                    MessageBox.Show("Only the numeric id can be entered and used for the search. Example 8");
+                    inputPartTextField.Clear();
                 }
             }
             else
@@ -180,10 +190,18 @@ namespace wgu_968
 
         private void searchProductbtn_Click(object sender, EventArgs e)
         {
-            dgvProducts.ClearSelection();
             if (inputProductTextField.Text != "")
             {
-                int productId = Convert.ToInt32(inputProductTextField.Text);
+                int productId;
+
+                if (!int.TryParse(inputProductTextField.Text, out productId))
+                {
+                    MessageBox.Show("Only numbers can be entered in the search. Example 8");
+                    
+                    return;
+                }
+
+                productId = Convert.ToInt32(inputProductTextField.Text);
                 Product product = Inventory.lookupProduct(productId);
                 if (product != null)
                 {

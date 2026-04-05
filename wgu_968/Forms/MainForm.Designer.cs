@@ -123,7 +123,7 @@
             // 
             // searchPartBtn
             // 
-            this.searchPartBtn.Location = new System.Drawing.Point(403, 38);
+            this.searchPartBtn.Location = new System.Drawing.Point(403, 39);
             this.searchPartBtn.Name = "searchPartBtn";
             this.searchPartBtn.Size = new System.Drawing.Size(69, 23);
             this.searchPartBtn.TabIndex = 6;
